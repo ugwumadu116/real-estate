@@ -505,7 +505,15 @@ export interface PropertySale {
     actualClosingDate?: Date
     commission: {
         agentCommission: number
+        brokerCommission: number
         totalCommission: number
+    }
+    financing: {
+        type: 'cash' | 'conventional' | 'fha' | 'va' | 'usda'
+        preApproved: boolean
+        lender?: string
+        downPayment: number
+        loanAmount: number
     }
     documents: Document[]
     timeline: SaleTimelineEvent[]

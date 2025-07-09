@@ -30,7 +30,10 @@ import {
     mockProperties,
     mockMaintenanceRequests,
     mockPayments,
-    mockTenants
+    mockTenants,
+    mockPropertyListings,
+    mockPropertySales,
+    mockBuyers
 } from "@/lib/mock-data"
 import { formatCurrency, formatDate, formatPercentage } from "@/lib/utils"
 
@@ -175,6 +178,11 @@ function DashboardStatsCards() {
     }
 
     // Admin, Property Manager, and Landlord stats
+    const activeListings = mockPropertyListings.filter(l => l.status === 'active')
+    const underContractSales = mockPropertySales.filter(s => s.status === 'under_contract')
+    const qualifiedBuyers = mockBuyers.filter(b => b.status === 'qualified')
+    const totalSalesValue = mockPropertySales.reduce((sum, sale) => sum + sale.acceptedPrice, 0)
+
     return (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <Card className="relative overflow-hidden">
@@ -192,43 +200,41 @@ function DashboardStatsCards() {
             </Card>
             <Card className="relative overflow-hidden">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Units</CardTitle>
-                    <Home className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">Active Listings</CardTitle>
+                    <Eye className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{mockDashboardStats.totalUnits}</div>
+                    <div className="text-2xl font-bold">{activeListings.length}</div>
                     <p className="text-xs text-muted-foreground">
-                        {formatPercentage(mockDashboardStats.occupancyRate)} occupancy
-                    </p>
-                    <div className="absolute top-0 right-0 h-16 w-16 bg-blue-500/10 rounded-full -translate-y-8 translate-x-8" />
-                </CardContent>
-            </Card>
-            <Card className="relative overflow-hidden">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Monthly Rent</CardTitle>
-                    <DollarSign className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">
-                        {formatCurrency(mockDashboardStats.totalRentCollected)}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                        Collected this month
+                        Properties for sale
                     </p>
                     <div className="absolute top-0 right-0 h-16 w-16 bg-green-500/10 rounded-full -translate-y-8 translate-x-8" />
                 </CardContent>
             </Card>
             <Card className="relative overflow-hidden">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Pending Maintenance</CardTitle>
-                    <Wrench className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">Under Contract</CardTitle>
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold text-orange-600">{mockDashboardStats.pendingMaintenance}</div>
+                    <div className="text-2xl font-bold">{underContractSales.length}</div>
                     <p className="text-xs text-muted-foreground">
-                        Open requests
+                        Sales in progress
                     </p>
-                    <div className="absolute top-0 right-0 h-16 w-16 bg-orange-500/10 rounded-full -translate-y-8 translate-x-8" />
+                    <div className="absolute top-0 right-0 h-16 w-16 bg-blue-500/10 rounded-full -translate-y-8 translate-x-8" />
+                </CardContent>
+            </Card>
+            <Card className="relative overflow-hidden">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total Sales Value</CardTitle>
+                    <DollarSign className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">{formatCurrency(totalSalesValue)}</div>
+                    <p className="text-xs text-muted-foreground">
+                        All time sales
+                    </p>
+                    <div className="absolute top-0 right-0 h-16 w-16 bg-yellow-500/10 rounded-full -translate-y-8 translate-x-8" />
                 </CardContent>
             </Card>
         </div>

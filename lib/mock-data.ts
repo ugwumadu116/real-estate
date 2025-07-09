@@ -252,6 +252,92 @@ export const mockProperties: Property[] = [
     coordinates: { lat: 30.2672, lng: -97.7431 },
     createdAt: new Date("2024-01-03"),
     updatedAt: new Date("2024-01-03")
+  },
+  {
+    id: "prop-4",
+    name: "Maple Street Family Home",
+    address: {
+      street: "456 Maple Street",
+      city: "Seattle",
+      state: "WA",
+      zipCode: "98101",
+      country: "USA"
+    },
+    type: "house",
+    status: "for_sale",
+    description: "Beautiful 3-bedroom family home with modern amenities, large backyard, and excellent school district",
+    images: [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    units: [],
+    totalUnits: 1,
+    occupiedUnits: 0,
+    propertyManagerId: "user-2",
+    ownerId: "user-3",
+    yearBuilt: 2018,
+    amenities: ["Large Backyard", "2-Car Garage", "Modern Kitchen", "Hardwood Floors"],
+    coordinates: { lat: 47.6062, lng: -122.3321 },
+    createdAt: new Date("2024-01-04"),
+    updatedAt: new Date("2024-01-04")
+  },
+  {
+    id: "prop-5",
+    name: "Downtown Luxury Condo",
+    address: {
+      street: "123 Luxury Lane",
+      city: "Miami",
+      state: "FL",
+      zipCode: "33101",
+      country: "USA"
+    },
+    type: "condo",
+    status: "for_sale",
+    description: "Premium condo in the heart of downtown with spectacular city views and luxury amenities",
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    units: [],
+    totalUnits: 1,
+    occupiedUnits: 0,
+    propertyManagerId: "user-2",
+    ownerId: "user-3",
+    yearBuilt: 2020,
+    amenities: ["24/7 Concierge", "Rooftop Pool", "Fitness Center", "Underground Parking"],
+    coordinates: { lat: 25.7617, lng: -80.1918 },
+    createdAt: new Date("2024-01-05"),
+    updatedAt: new Date("2024-01-05")
+  },
+  {
+    id: "prop-6",
+    name: "Investment Multi-Unit Property",
+    address: {
+      street: "789 Business Blvd",
+      city: "Denver",
+      state: "CO",
+      zipCode: "80201",
+      country: "USA"
+    },
+    type: "apartment_block",
+    status: "for_sale",
+    description: "Excellent investment property with 4 units, strong rental history, and great cash flow potential",
+    images: [
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    units: [],
+    totalUnits: 4,
+    occupiedUnits: 3,
+    propertyManagerId: "user-2",
+    ownerId: "user-3",
+    yearBuilt: 2010,
+    amenities: ["Commercial Zoning", "Parking for 8", "Separate Utilities", "Storage Units"],
+    coordinates: { lat: 39.7392, lng: -104.9903 },
+    createdAt: new Date("2024-01-06"),
+    updatedAt: new Date("2024-01-06")
   }
 ]
 
@@ -1053,4 +1139,497 @@ export const getSecurityDepositByTenantId = (tenantId: string): SecurityDeposit 
 
 export const getUnitConditionReportsByUnitId = (unitId: string): UnitConditionReport[] => {
   return mockUnitConditionReports.filter(report => report.unitId === unitId)
+}
+
+// Mock Property Listings
+export const mockPropertyListings: PropertyListing[] = [
+  {
+    id: "listing-1",
+    propertyId: "prop-3",
+    title: "Beautiful 3-Bedroom House in Prime Location",
+    description: "Stunning family home with modern amenities, large backyard, and excellent school district. Recently renovated kitchen and bathrooms.",
+    listingPrice: 750000,
+    originalPrice: 780000,
+    status: "active",
+    listingDate: new Date("2024-01-15"),
+    expiryDate: new Date("2024-07-15"),
+    featured: true,
+    images: [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    features: ["3 Bedrooms", "2.5 Bathrooms", "2,200 sq ft", "2-Car Garage", "Large Backyard"],
+    propertyHighlights: ["Recently Renovated", "Excellent School District", "Prime Location", "Modern Kitchen"],
+    showingInstructions: "Call 24 hours in advance. Available for showings Mon-Fri 9AM-6PM, Sat 10AM-4PM",
+    agentId: "user-2",
+    views: 245,
+    inquiries: 12,
+    createdAt: new Date("2024-01-15"),
+    updatedAt: new Date("2024-01-15")
+  },
+  {
+    id: "listing-2",
+    propertyId: "prop-4",
+    title: "Investment Opportunity: Multi-Unit Property",
+    description: "Excellent investment property with 4 units, strong rental history, and great cash flow potential.",
+    listingPrice: 1200000,
+    status: "active",
+    listingDate: new Date("2024-02-01"),
+    expiryDate: new Date("2024-08-01"),
+    featured: false,
+    images: [
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    features: ["4 Units", "Commercial Zoning", "Parking for 8", "Separate Utilities"],
+    propertyHighlights: ["Strong Rental History", "Investment Grade", "Commercial Zoning", "High Cash Flow"],
+    showingInstructions: "By appointment only. Contact agent for showing schedule.",
+    agentId: "user-2",
+    views: 89,
+    inquiries: 5,
+    createdAt: new Date("2024-02-01"),
+    updatedAt: new Date("2024-02-01")
+  },
+  {
+    id: "listing-3",
+    propertyId: "prop-5",
+    title: "Luxury Condo with City Views",
+    description: "Premium condo in the heart of downtown with spectacular city views, luxury amenities, and 24/7 concierge service.",
+    listingPrice: 950000,
+    status: "under_contract",
+    listingDate: new Date("2024-01-20"),
+    expiryDate: new Date("2024-07-20"),
+    featured: true,
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop"
+    ],
+    documents: [],
+    features: ["2 Bedrooms", "2 Bathrooms", "1,500 sq ft", "Balcony", "Underground Parking"],
+    propertyHighlights: ["City Views", "Luxury Amenities", "24/7 Concierge", "Prime Downtown Location"],
+    showingInstructions: "Available for immediate showing. Contact agent for access.",
+    agentId: "user-2",
+    views: 312,
+    inquiries: 18,
+    createdAt: new Date("2024-01-20"),
+    updatedAt: new Date("2024-01-20")
+  }
+]
+
+// Mock Buyers
+export const mockBuyers: Buyer[] = [
+  {
+    id: "buyer-1",
+    name: "Jennifer Martinez",
+    email: "jennifer@email.com",
+    phone: "(555) 111-2222",
+    status: "qualified",
+    budget: {
+      min: 600000,
+      max: 800000
+    },
+    preferences: {
+      propertyTypes: ["house", "condo"],
+      locations: ["Downtown", "Westside", "Midtown"],
+      bedrooms: 3,
+      bathrooms: 2,
+      minArea: 1500,
+      maxArea: 2500
+    },
+    financing: {
+      preApproved: true,
+      preApprovalAmount: 750000,
+      lender: "Chase Bank",
+      downPayment: 150000
+    },
+    notes: "Looking for family home with good schools. Prefers move-in ready condition.",
+    assignedAgentId: "user-2",
+    createdAt: new Date("2024-01-10"),
+    updatedAt: new Date("2024-01-10")
+  },
+  {
+    id: "buyer-2",
+    name: "Robert Thompson",
+    email: "robert@email.com",
+    phone: "(555) 222-3333",
+    status: "interested",
+    budget: {
+      min: 1000000,
+      max: 1500000
+    },
+    preferences: {
+      propertyTypes: ["commercial", "apartment_block"],
+      locations: ["Business District", "Industrial Area"],
+      minArea: 5000
+    },
+    financing: {
+      preApproved: false,
+      downPayment: 300000
+    },
+    notes: "Investment buyer looking for multi-unit properties with strong cash flow.",
+    assignedAgentId: "user-2",
+    createdAt: new Date("2024-01-25"),
+    updatedAt: new Date("2024-01-25")
+  },
+  {
+    id: "buyer-3",
+    name: "Amanda Wilson",
+    email: "amanda@email.com",
+    phone: "(555) 333-4444",
+    status: "under_contract",
+    budget: {
+      min: 800000,
+      max: 1000000
+    },
+    preferences: {
+      propertyTypes: ["condo", "apartment"],
+      locations: ["Downtown", "Uptown"],
+      bedrooms: 2,
+      bathrooms: 2,
+      minArea: 1200
+    },
+    financing: {
+      preApproved: true,
+      preApprovalAmount: 950000,
+      lender: "Wells Fargo",
+      downPayment: 190000
+    },
+    notes: "Young professional looking for luxury condo with amenities.",
+    assignedAgentId: "user-2",
+    createdAt: new Date("2024-01-15"),
+    updatedAt: new Date("2024-01-15")
+  }
+]
+
+// Mock Property Sales
+export const mockPropertySales: PropertySale[] = [
+  {
+    id: "sale-1",
+    propertyId: "prop-3",
+    listingId: "listing-1",
+    buyerId: "buyer-1",
+    sellerId: "user-3",
+    agentId: "user-2",
+    status: "under_contract",
+    offerPrice: 735000,
+    acceptedPrice: 735000,
+    earnestMoney: 15000,
+    closingDate: new Date("2024-04-15"),
+    commission: {
+      agentCommission: 17640,
+      brokerCommission: 4410,
+      totalCommission: 22050
+    },
+    financing: {
+      type: "conventional",
+      preApproved: true,
+      lender: "Chase Bank",
+      downPayment: 147000,
+      loanAmount: 588000
+    },
+    documents: [],
+    timeline: [
+      {
+        id: "timeline-1",
+        title: "Offer Accepted",
+        description: "Purchase offer accepted by seller",
+        date: new Date("2024-02-15"),
+        status: "completed",
+        assignedTo: "user-2"
+      },
+      {
+        id: "timeline-2",
+        title: "Home Inspection",
+        description: "Schedule and complete home inspection",
+        date: new Date("2024-02-25"),
+        status: "pending",
+        assignedTo: "buyer-1"
+      },
+      {
+        id: "timeline-3",
+        title: "Appraisal",
+        description: "Lender appraisal ordered and completed",
+        date: new Date("2024-03-05"),
+        status: "pending",
+        assignedTo: "user-2"
+      },
+      {
+        id: "timeline-4",
+        title: "Closing",
+        description: "Final closing and transfer of ownership",
+        date: new Date("2024-04-15"),
+        status: "pending",
+        assignedTo: "user-2"
+      }
+    ],
+    notes: "Buyer is pre-approved and motivated. Expecting smooth transaction.",
+    createdAt: new Date("2024-02-15"),
+    updatedAt: new Date("2024-02-15")
+  },
+  {
+    id: "sale-2",
+    propertyId: "prop-1",
+    listingId: "listing-2",
+    buyerId: "buyer-2",
+    sellerId: "user-1",
+    agentId: "user-2",
+    status: "completed",
+    offerPrice: 450000,
+    acceptedPrice: 445000,
+    earnestMoney: 10000,
+    closingDate: new Date("2024-03-20"),
+    actualClosingDate: new Date("2024-03-20"),
+    commission: {
+      agentCommission: 13350,
+      brokerCommission: 3340,
+      totalCommission: 16690
+    },
+    financing: {
+      type: "fha",
+      preApproved: true,
+      lender: "Quicken Loans",
+      downPayment: 22250,
+      loanAmount: 422750
+    },
+    documents: [],
+    timeline: [
+      {
+        id: "timeline-5",
+        title: "Offer Accepted",
+        description: "Purchase offer accepted by seller",
+        date: new Date("2024-01-15"),
+        status: "completed",
+        assignedTo: "user-2"
+      },
+      {
+        id: "timeline-6",
+        title: "Home Inspection",
+        description: "Schedule and complete home inspection",
+        date: new Date("2024-01-25"),
+        status: "completed",
+        assignedTo: "buyer-2"
+      },
+      {
+        id: "timeline-7",
+        title: "Appraisal",
+        description: "Lender appraisal ordered and completed",
+        date: new Date("2024-02-05"),
+        status: "completed",
+        assignedTo: "user-2"
+      },
+      {
+        id: "timeline-8",
+        title: "Closing",
+        description: "Final closing and transfer of ownership",
+        date: new Date("2024-03-20"),
+        status: "completed",
+        assignedTo: "user-2"
+      }
+    ],
+    notes: "First-time homebuyer. Transaction completed successfully.",
+    createdAt: new Date("2024-01-15"),
+    updatedAt: new Date("2024-03-20")
+  },
+  {
+    id: "sale-3",
+    propertyId: "prop-2",
+    listingId: "listing-3",
+    buyerId: "buyer-3",
+    sellerId: "user-1",
+    agentId: "user-2",
+    status: "pending",
+    offerPrice: 920000,
+    acceptedPrice: 920000,
+    earnestMoney: 20000,
+    closingDate: new Date("2024-05-15"),
+    commission: {
+      agentCommission: 27600,
+      brokerCommission: 6900,
+      totalCommission: 34500
+    },
+    financing: {
+      type: "conventional",
+      preApproved: true,
+      lender: "Wells Fargo",
+      downPayment: 184000,
+      loanAmount: 736000
+    },
+    documents: [],
+    timeline: [
+      {
+        id: "timeline-9",
+        title: "Offer Submitted",
+        description: "Purchase offer submitted to seller",
+        date: new Date("2024-02-14"),
+        status: "completed",
+        assignedTo: "user-2"
+      },
+      {
+        id: "timeline-10",
+        title: "Offer Review",
+        description: "Seller reviewing offer terms",
+        date: new Date("2024-02-16"),
+        status: "pending",
+        assignedTo: "user-1"
+      }
+    ],
+    notes: "Luxury property sale. Buyer is well-qualified with strong financial backing.",
+    createdAt: new Date("2024-02-14"),
+    updatedAt: new Date("2024-02-14")
+  }
+]
+
+// Mock Property Inquiries
+export const mockPropertyInquiries: PropertyInquiry[] = [
+  {
+    id: "inquiry-1",
+    listingId: "listing-1",
+    buyerId: "buyer-1",
+    message: "I'm very interested in this property. Can you tell me more about the school district and recent renovations?",
+    preferredContactMethod: "email",
+    preferredTime: "Evenings after 6 PM",
+    status: "showed",
+    scheduledShowing: new Date("2024-02-10"),
+    notes: "Buyer was very impressed with the property. Likely to make an offer.",
+    createdAt: new Date("2024-02-05"),
+    updatedAt: new Date("2024-02-10")
+  },
+  {
+    id: "inquiry-2",
+    listingId: "listing-2",
+    buyerId: "buyer-2",
+    message: "What are the current rental rates for the units? Looking for investment property with good cash flow.",
+    preferredContactMethod: "phone",
+    preferredTime: "Weekdays 9 AM - 5 PM",
+    status: "contacted",
+    notes: "Investment buyer interested in cash flow analysis.",
+    createdAt: new Date("2024-02-08"),
+    updatedAt: new Date("2024-02-08")
+  }
+]
+
+// Mock Property Showings
+export const mockPropertyShowings: PropertyShowing[] = [
+  {
+    id: "showing-1",
+    listingId: "listing-1",
+    buyerId: "buyer-1",
+    agentId: "user-2",
+    scheduledDate: new Date("2024-02-10"),
+    duration: 60,
+    status: "completed",
+    feedback: {
+      rating: 5,
+      comments: "Beautiful property! The kitchen renovation is exactly what we were looking for. The backyard is perfect for our kids.",
+      interested: true,
+      offerLikelihood: "high"
+    },
+    notes: "Buyer was very impressed. Showed strong interest in making an offer.",
+    createdAt: new Date("2024-02-08"),
+    updatedAt: new Date("2024-02-10")
+  },
+  {
+    id: "showing-2",
+    listingId: "listing-3",
+    buyerId: "buyer-3",
+    agentId: "user-2",
+    scheduledDate: new Date("2024-02-12"),
+    duration: 45,
+    status: "completed",
+    feedback: {
+      rating: 4,
+      comments: "Great location and amenities. The city views are amazing. Would like to see more details about HOA fees.",
+      interested: true,
+      offerLikelihood: "medium"
+    },
+    notes: "Buyer liked the property but has concerns about HOA fees.",
+    createdAt: new Date("2024-02-10"),
+    updatedAt: new Date("2024-02-12")
+  }
+]
+
+// Mock Property Offers
+export const mockPropertyOffers: PropertyOffer[] = [
+  {
+    id: "offer-1",
+    listingId: "listing-1",
+    buyerId: "buyer-1",
+    amount: 735000,
+    earnestMoney: 15000,
+    financing: {
+      type: "conventional",
+      preApproved: true,
+      lender: "Chase Bank",
+      downPayment: 147000
+    },
+    contingencies: {
+      inspection: true,
+      appraisal: true,
+      financing: true,
+      saleOfBuyerHome: false
+    },
+    closingDate: new Date("2024-04-15"),
+    status: "accepted",
+    notes: "Strong offer with good terms. Buyer is well-qualified.",
+    createdAt: new Date("2024-02-12"),
+    updatedAt: new Date("2024-02-15")
+  },
+  {
+    id: "offer-2",
+    listingId: "listing-3",
+    buyerId: "buyer-3",
+    amount: 920000,
+    earnestMoney: 20000,
+    financing: {
+      type: "conventional",
+      preApproved: true,
+      lender: "Wells Fargo",
+      downPayment: 184000
+    },
+    contingencies: {
+      inspection: true,
+      appraisal: true,
+      financing: true,
+      saleOfBuyerHome: false
+    },
+    closingDate: new Date("2024-04-20"),
+    status: "pending",
+    notes: "Offer submitted, waiting for seller response.",
+    createdAt: new Date("2024-02-14"),
+    updatedAt: new Date("2024-02-14")
+  }
+]
+
+// Helper functions for selling data
+export const getPropertyListingById = (id: string): PropertyListing | undefined => {
+  return mockPropertyListings.find(listing => listing.id === id)
+}
+
+export const getPropertyListingsByPropertyId = (propertyId: string): PropertyListing[] => {
+  return mockPropertyListings.filter(listing => listing.propertyId === propertyId)
+}
+
+export const getBuyerById = (id: string): Buyer | undefined => {
+  return mockBuyers.find(buyer => buyer.id === id)
+}
+
+export const getPropertySaleById = (id: string): PropertySale | undefined => {
+  return mockPropertySales.find(sale => sale.id === id)
+}
+
+export const getPropertySalesByPropertyId = (propertyId: string): PropertySale[] => {
+  return mockPropertySales.filter(sale => sale.propertyId === propertyId)
+}
+
+export const getPropertyInquiriesByListingId = (listingId: string): PropertyInquiry[] => {
+  return mockPropertyInquiries.filter(inquiry => inquiry.listingId === listingId)
+}
+
+export const getPropertyShowingsByListingId = (listingId: string): PropertyShowing[] => {
+  return mockPropertyShowings.filter(showing => showing.listingId === listingId)
+}
+
+export const getPropertyOffersByListingId = (listingId: string): PropertyOffer[] => {
+  return mockPropertyOffers.filter(offer => offer.listingId === listingId)
 }

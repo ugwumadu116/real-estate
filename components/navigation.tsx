@@ -18,7 +18,8 @@ import {
   MessageSquare,
   Settings,
   LogOut,
-  User
+  User,
+  DollarSign
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth, useRole } from "@/lib/auth-context"
@@ -57,7 +58,8 @@ export function Navigation() {
       Truck,
       BarChart,
       MessageSquare,
-      Settings
+      Settings,
+      DollarSign
     }
     return iconMap[iconName] || Home
   }

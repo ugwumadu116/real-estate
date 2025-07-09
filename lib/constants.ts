@@ -166,6 +166,9 @@ export const NAVIGATION_ITEMS = {
     admin: [
         { href: '/dashboard', label: 'Dashboard', icon: 'Home' },
         { href: '/properties', label: 'Properties', icon: 'Building' },
+        { href: '/listings', label: 'Listings', icon: 'Building' },
+        { href: '/buyers', label: 'Buyers', icon: 'Users' },
+        { href: '/sales', label: 'Sales', icon: 'DollarSign' },
         { href: '/tenants', label: 'Tenants', icon: 'Users' },
         { href: '/leases', label: 'Leases', icon: 'FileText' },
         { href: '/payments', label: 'Payments', icon: 'CreditCard' },
@@ -178,6 +181,9 @@ export const NAVIGATION_ITEMS = {
     property_manager: [
         { href: '/dashboard', label: 'Dashboard', icon: 'Home' },
         { href: '/properties', label: 'Properties', icon: 'Building' },
+        { href: '/listings', label: 'Listings', icon: 'Building' },
+        { href: '/buyers', label: 'Buyers', icon: 'Users' },
+        { href: '/sales', label: 'Sales', icon: 'DollarSign' },
         { href: '/tenants', label: 'Tenants', icon: 'Users' },
         { href: '/leases', label: 'Leases', icon: 'FileText' },
         { href: '/payments', label: 'Payments', icon: 'CreditCard' },
@@ -189,6 +195,9 @@ export const NAVIGATION_ITEMS = {
     landlord: [
         { href: '/dashboard', label: 'Dashboard', icon: 'Home' },
         { href: '/properties', label: 'Properties', icon: 'Building' },
+        { href: '/listings', label: 'Listings', icon: 'Building' },
+        { href: '/buyers', label: 'Buyers', icon: 'Users' },
+        { href: '/sales', label: 'Sales', icon: 'DollarSign' },
         { href: '/tenants', label: 'Tenants', icon: 'Users' },
         { href: '/leases', label: 'Leases', icon: 'FileText' },
         { href: '/payments', label: 'Payments', icon: 'CreditCard' },

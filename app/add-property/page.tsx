@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Upload, X } from "lucide-react"
+import { DashboardLayout } from "@/components/dashboard-layout"
 
 export default function AddPropertyPage() {
   const [formData, setFormData] = useState({
@@ -71,49 +72,51 @@ export default function AddPropertyPage() {
 
   if (success) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-md mx-auto">
-          <CardContent className="pt-6 text-center">
-            <div className="text-green-600 text-6xl mb-4">✓</div>
-            <h2 className="text-2xl font-bold mb-2">Property Listed!</h2>
-            <p className="text-muted-foreground mb-4">Your property has been successfully submitted for review.</p>
-            <Button
-              onClick={() => {
-                setSuccess(false)
-                setFormData({
-                  title: "",
-                  price: "",
-                  location: "",
-                  description: "",
-                  bedrooms: "",
-                  bathrooms: "",
-                  area: "",
-                  type: "",
-                  features: "",
-                })
-                setImages([])
-              }}
-            >
-              Add Another Property
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+      <DashboardLayout>
+        <div className="max-w-md mx-auto">
+          <Card>
+            <CardContent className="pt-6 text-center">
+              <div className="text-green-600 text-6xl mb-4">✓</div>
+              <h2 className="text-2xl font-bold mb-2">Property Added!</h2>
+              <p className="text-muted-foreground mb-4">Your property has been successfully added to the system.</p>
+              <Button
+                onClick={() => {
+                  setSuccess(false)
+                  setFormData({
+                    title: "",
+                    price: "",
+                    location: "",
+                    description: "",
+                    bedrooms: "",
+                    bathrooms: "",
+                    area: "",
+                    type: "",
+                    features: "",
+                  })
+                  setImages([])
+                }}
+              >
+                Add Another Property
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </DashboardLayout>
     )
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4">Add New Property</h1>
-          <p className="text-muted-foreground">Fill out the form below to list your property on our platform</p>
+          <h1 className="text-3xl font-bold tracking-tight mb-4">Add New Property</h1>
+          <p className="text-muted-foreground">Fill out the form below to add a new property to your portfolio</p>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle>Property Details</CardTitle>
-            <CardDescription>Provide accurate information to attract potential buyers</CardDescription>
+            <CardDescription>Provide accurate information about the property</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -208,26 +211,28 @@ export default function AddPropertyPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="type">Property Type</Label>
-                  <Select onValueChange={handleSelectChange} required>
+                  <Select value={formData.type} onValueChange={handleSelectChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="house">House</SelectItem>
                       <SelectItem value="apartment">Apartment</SelectItem>
+                      <SelectItem value="house">House</SelectItem>
                       <SelectItem value="condo">Condo</SelectItem>
                       <SelectItem value="townhouse">Townhouse</SelectItem>
+                      <SelectItem value="commercial">Commercial</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="features">Features (comma-separated)</Label>
-                <Input
+                <Label htmlFor="features">Features</Label>
+                <Textarea
                   id="features"
                   name="features"
-                  placeholder="e.g., Pool, Garage, Garden, Modern Kitchen"
+                  placeholder="List key features and amenities..."
+                  rows={3}
                   value={formData.features}
                   onChange={handleInputChange}
                 />
@@ -235,66 +240,55 @@ export default function AddPropertyPage() {
 
               <div className="space-y-2">
                 <Label>Property Images</Label>
-                <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6">
-                  <div className="text-center">
-                    <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                    <div className="text-sm text-muted-foreground mb-2">Click to upload or drag and drop</div>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                      id="image-upload"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => document.getElementById("image-upload")?.click()}
-                    >
+                <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center">
+                  <Upload className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
+                  <p className="text-sm text-muted-foreground mb-2">Upload property images</p>
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label htmlFor="image-upload">
+                    <Button type="button" variant="outline" className="cursor-pointer">
                       Choose Files
                     </Button>
-                  </div>
+                  </label>
                 </div>
-
-                {images.length > 0 && (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                    {images.map((image, index) => (
-                      <div key={index} className="relative">
-                        <img
-                          src={image || "/placeholder.svg"}
-                          alt={`Property ${index + 1}`}
-                          className="w-full h-24 object-cover rounded-lg"
-                        />
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="sm"
-                          className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
-                          onClick={() => removeImage(index)}
-                        >
-                          <X className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
 
-              <Alert>
-                <AlertDescription>
-                  <strong>Note:</strong> This is a demo form. In a real application, images would be uploaded to a cloud
-                  storage service and the property data would be saved to a database.
-                </AlertDescription>
-              </Alert>
+              {images.length > 0 && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image}
+                        alt={`Property ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        className="absolute top-2 right-2 h-6 w-6"
+                        onClick={() => removeImage(index)}
+                      >
+                        <X className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-              <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-                {isLoading ? "Submitting..." : "List Property"}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Adding Property..." : "Add Property"}
               </Button>
             </form>
           </CardContent>
         </Card>
       </div>
-    </div>
+    </DashboardLayout>
   )
 }

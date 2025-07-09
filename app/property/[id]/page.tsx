@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { ChevronLeft, ChevronRight, MapPin, Bed, Bath, Square, Phone, Mail, Heart } from "lucide-react"
-import { mockProperties } from "@/lib/mock-data"
+import { ChevronLeft, ChevronRight, MapPin, Building, Users, Home, Phone, Mail, Heart, Edit } from "lucide-react"
+import Link from "next/link"
+import { mockProperties, mockUsers } from "@/lib/mock-data"
+import { DashboardLayout } from "@/components/dashboard-layout"
 
 export default function PropertyDetailsPage() {
   const params = useParams()
@@ -17,15 +19,16 @@ export default function PropertyDetailsPage() {
   const [isFavorited, setIsFavorited] = useState(false)
 
   const property = mockProperties.find((p) => p.id === propertyId)
+  const propertyManager = property ? mockUsers.find(u => u.id === property.propertyManagerId) : null
 
   if (!property) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <DashboardLayout>
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Property Not Found</h1>
           <p className="text-muted-foreground">The property you're looking for doesn't exist.</p>
         </div>
-      </div>
+      </DashboardLayout>
     )
   }
 
@@ -38,7 +41,7 @@ export default function PropertyDetailsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="lg:col-span-2">
@@ -47,7 +50,7 @@ export default function PropertyDetailsPage() {
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
                 src={property.images[currentImageIndex] || "/placeholder.svg"}
-                alt={`${property.title} - Image ${currentImageIndex + 1}`}
+                alt={`${property.name} - Image ${currentImageIndex + 1}`}
                 fill
                 className="object-cover"
               />
@@ -83,15 +86,24 @@ export default function PropertyDetailsPage() {
           <div className="mb-6">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h1 className="text-3xl font-bold mb-2">{property.title}</h1>
+                <h1 className="text-3xl font-bold tracking-tight mb-2">{property.name}</h1>
                 <div className="flex items-center text-muted-foreground mb-2">
                   <MapPin className="h-4 w-4 mr-1" />
-                  <span>{property.location}</span>
+                  <span>
+                    {property.address.street}, {property.address.city}, {property.address.state} {property.address.zipCode}
+                  </span>
                 </div>
-                <Badge className="capitalize">{property.type}</Badge>
+                <div className="flex gap-2">
+                  <Badge className="capitalize">{property.type}</Badge>
+                  <Badge variant={property.status === 'active' ? 'default' : 'secondary'} className="capitalize">
+                    {property.status}
+                  </Badge>
+                </div>
               </div>
               <div className="text-right">
-                <div className="text-3xl font-bold text-primary mb-2">${property.price.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-primary mb-2">
+                  {Math.round((property.occupiedUnits / property.totalUnits) * 100)}% Occupancy
+                </div>
                 <Button
                   variant="outline"
                   size="sm"
@@ -106,20 +118,36 @@ export default function PropertyDetailsPage() {
 
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center p-4 bg-muted rounded-lg">
-                <Bed className="h-6 w-6 mx-auto mb-2 text-primary" />
-                <div className="font-semibold">{property.bedrooms}</div>
-                <div className="text-sm text-muted-foreground">Bedrooms</div>
+                <Building className="h-6 w-6 mx-auto mb-2 text-primary" />
+                <div className="font-semibold">{property.totalUnits}</div>
+                <div className="text-sm text-muted-foreground">Total Units</div>
               </div>
               <div className="text-center p-4 bg-muted rounded-lg">
-                <Bath className="h-6 w-6 mx-auto mb-2 text-primary" />
-                <div className="font-semibold">{property.bathrooms}</div>
-                <div className="text-sm text-muted-foreground">Bathrooms</div>
+                <Users className="h-6 w-6 mx-auto mb-2 text-primary" />
+                <div className="font-semibold">{property.occupiedUnits}</div>
+                <div className="text-sm text-muted-foreground">Occupied</div>
               </div>
               <div className="text-center p-4 bg-muted rounded-lg">
-                <Square className="h-6 w-6 mx-auto mb-2 text-primary" />
-                <div className="font-semibold">{property.area}</div>
-                <div className="text-sm text-muted-foreground">Sq Ft</div>
+                <Home className="h-6 w-6 mx-auto mb-2 text-primary" />
+                <div className="font-semibold">{property.totalUnits - property.occupiedUnits}</div>
+                <div className="text-sm text-muted-foreground">Available</div>
               </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="flex gap-2 mb-6">
+              <Button asChild>
+                <Link href={`/properties/${property.id}/units`}>
+                  <Building className="h-4 w-4 mr-2" />
+                  Manage Units
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href={`/properties/${property.id}/edit`}>
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit Property
+                </Link>
+              </Button>
             </div>
           </div>
 
@@ -140,10 +168,10 @@ export default function PropertyDetailsPage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-2">
-                {property.features.map((feature, index) => (
+                {property.amenities.map((amenity, index) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3" />
-                    <span className="text-sm">{feature}</span>
+                    <span className="text-sm">{amenity}</span>
                   </div>
                 ))}
               </div>
@@ -173,45 +201,53 @@ export default function PropertyDetailsPage() {
         <div className="lg:col-span-1">
           <Card className="sticky top-4">
             <CardHeader>
-              <CardTitle>Contact Agent</CardTitle>
+              <CardTitle>Property Manager</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-primary-foreground font-semibold text-lg">
-                    {property.agent.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                </div>
-                <h3 className="font-semibold">{property.agent.name}</h3>
-                <p className="text-sm text-muted-foreground">Real Estate Agent</p>
-              </div>
-
-              <Separator />
-
-              <div className="space-y-3">
-                <Button className="w-full" size="lg">
-                  <Phone className="h-4 w-4 mr-2" />
-                  {property.agent.phone}
-                </Button>
-                <Button variant="outline" className="w-full bg-transparent" size="lg">
-                  <Mail className="h-4 w-4 mr-2" />
-                  Email Agent
-                </Button>
-              </div>
-
-              <Separator />
-
-              <div className="text-center text-sm text-muted-foreground">
-                <p>Available for viewing</p>
-                <p className="font-semibold">Mon - Fri: 9AM - 6PM</p>
-              </div>
+              {propertyManager ? (
+                <>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                      <span className="text-primary-foreground font-semibold text-lg">
+                        {propertyManager.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold">{propertyManager.name}</h3>
+                    <p className="text-sm text-muted-foreground capitalize">{propertyManager.role.replace('_', ' ')}</p>
+                  </div>
+                  <Separator />
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <Phone className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <span className="text-sm">{propertyManager.phone}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Mail className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <span className="text-sm">{propertyManager.email}</span>
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="space-y-2">
+                    <Button className="w-full">
+                      <Phone className="h-4 w-4 mr-2" />
+                      Contact Manager
+                    </Button>
+                    <Button variant="outline" className="w-full">
+                      <Mail className="h-4 w-4 mr-2" />
+                      Send Message
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <p className="text-muted-foreground text-center">No property manager assigned</p>
+              )}
             </CardContent>
           </Card>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   )
 }

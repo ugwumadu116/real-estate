@@ -208,7 +208,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Main Content */}
             <div className="flex">
                 {/* Sidebar - Desktop only */}
-                <aside className="hidden md:flex w-64 flex-col border-r bg-background">
+                <aside className="hidden md:flex w-64 flex-col border-r bg-background h-[calc(100vh-4rem)]">
                     <div className="flex-1 p-4">
                         <nav className="space-y-2">
                             {navItems.map((item) => (

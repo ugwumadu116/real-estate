@@ -30,6 +30,7 @@ import { mockLeases, mockTenants, mockUnits, mockProperties, mockPayments } from
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { LeaseStatus } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function LeaseDetailsPage() {
     const params = useParams()
@@ -201,11 +202,11 @@ export default function LeaseDetailsPage() {
                                                     <div className="space-y-2">
                                                         <div className="flex justify-between">
                                                             <span className="text-sm text-muted-foreground">Start Date</span>
-                                                            <span className="text-sm">{new Date(lease.startDate).toLocaleDateString()}</span>
+                                                            <span className="text-sm">{format(new Date(lease.startDate), "MMM dd, yyyy")}</span>
                                                         </div>
                                                         <div className="flex justify-between">
                                                             <span className="text-sm text-muted-foreground">End Date</span>
-                                                            <span className="text-sm">{new Date(lease.endDate).toLocaleDateString()}</span>
+                                                            <span className="text-sm">{format(new Date(lease.endDate), "MMM dd, yyyy")}</span>
                                                         </div>
                                                         <div className="flex justify-between">
                                                             <span className="text-sm text-muted-foreground">Duration</span>
@@ -358,12 +359,12 @@ export default function LeaseDetailsPage() {
                                                                     <div>
                                                                         <div className="font-medium">
                                                                             {payment.paidDate ?
-                                                                                new Date(payment.paidDate).toLocaleDateString() :
-                                                                                new Date(payment.dueDate).toLocaleDateString()
+                                                                                format(new Date(payment.paidDate), "MMM dd, yyyy") :
+                                                                                format(new Date(payment.dueDate), "MMM dd, yyyy")
                                                                             }
                                                                         </div>
                                                                         <div className="text-sm text-muted-foreground">
-                                                                            Due: {new Date(payment.dueDate).toLocaleDateString()}
+                                                                            Due: {format(new Date(payment.dueDate), "MMM dd, yyyy")}
                                                                         </div>
                                                                     </div>
                                                                 </td>

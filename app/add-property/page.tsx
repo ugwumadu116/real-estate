@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Upload, X } from "lucide-react"
 import { DashboardLayout } from "@/components/dashboard-layout"
+import { PROPERTY_TYPES } from "@/lib/constants"
 
 export default function AddPropertyPage() {
   const [formData, setFormData] = useState({
@@ -216,11 +217,11 @@ export default function AddPropertyPage() {
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="apartment">Apartment</SelectItem>
-                      <SelectItem value="house">House</SelectItem>
-                      <SelectItem value="condo">Condo</SelectItem>
-                      <SelectItem value="townhouse">Townhouse</SelectItem>
-                      <SelectItem value="commercial">Commercial</SelectItem>
+                      {PROPERTY_TYPES.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>

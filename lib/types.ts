@@ -15,8 +15,8 @@ export interface User {
 }
 
 // Property Management Types
-export type PropertyType = 'apartment' | 'house' | 'condo' | 'townhouse' | 'commercial'
-export type PropertyStatus = 'active' | 'inactive' | 'maintenance' | 'development'
+export type PropertyType = 'apartment' | 'house' | 'condo' | 'townhouse' | 'commercial' | 'apartment_block' | 'duplex' | 'terrace' | 'semi_detached_duplex' | 'fully_detached_duplex' | 'land'
+export type PropertyStatus = 'active' | 'inactive' | 'maintenance' | 'development' | 'for_sale' | 'sold' | 'under_contract'
 
 export interface Property {
     id: string
@@ -430,4 +430,160 @@ export interface ConditionArea {
     issues: string[]
     photos: string[]
     estimatedRepairCost?: number
+}
+
+// Property Selling Types
+export type ListingStatus = 'draft' | 'active' | 'pending' | 'under_contract' | 'sold' | 'expired' | 'cancelled'
+export type SaleStatus = 'pending' | 'under_contract' | 'closing' | 'completed' | 'cancelled'
+export type BuyerStatus = 'prospect' | 'interested' | 'qualified' | 'under_contract' | 'closed' | 'lost'
+
+export interface PropertyListing {
+    id: string
+    propertyId: string
+    title: string
+    description: string
+    listingPrice: number
+    originalPrice?: number
+    status: ListingStatus
+    listingDate: Date
+    expiryDate?: Date
+    featured: boolean
+    images: string[]
+    documents: Document[]
+    features: string[]
+    propertyHighlights: string[]
+    showingInstructions?: string
+    agentId: string
+    views: number
+    inquiries: number
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface Buyer {
+    id: string
+    name: string
+    email: string
+    phone: string
+    status: BuyerStatus
+    budget: {
+        min: number
+        max: number
+    }
+    preferences: {
+        propertyTypes: PropertyType[]
+        locations: string[]
+        bedrooms?: number
+        bathrooms?: number
+        minArea?: number
+        maxArea?: number
+    }
+    financing: {
+        preApproved: boolean
+        preApprovalAmount?: number
+        lender?: string
+        downPayment?: number
+    }
+    notes?: string
+    assignedAgentId?: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface PropertySale {
+    id: string
+    propertyId: string
+    listingId: string
+    buyerId: string
+    sellerId: string
+    agentId: string
+    status: SaleStatus
+    offerPrice: number
+    acceptedPrice: number
+    earnestMoney: number
+    closingDate: Date
+    actualClosingDate?: Date
+    commission: {
+        agentCommission: number
+        totalCommission: number
+    }
+    documents: Document[]
+    timeline: SaleTimelineEvent[]
+    notes?: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface SaleTimelineEvent {
+    id: string
+    title: string
+    description: string
+    date: Date
+    status: 'pending' | 'completed' | 'overdue'
+    assignedTo?: string
+    notes?: string
+}
+
+export interface PropertyInquiry {
+    id: string
+    listingId: string
+    buyerId: string
+    message: string
+    preferredContactMethod: 'email' | 'phone' | 'text'
+    preferredTime?: string
+    status: 'new' | 'contacted' | 'scheduled' | 'showed' | 'followed_up' | 'closed'
+    scheduledShowing?: Date
+    notes?: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface PropertyShowing {
+    id: string
+    listingId: string
+    buyerId: string
+    agentId: string
+    scheduledDate: Date
+    duration: number // in minutes
+    status: 'scheduled' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+    feedback?: {
+        rating: number
+        comments: string
+        interested: boolean
+        offerLikelihood: 'low' | 'medium' | 'high'
+    }
+    notes?: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface PropertyOffer {
+    id: string
+    listingId: string
+    buyerId: string
+    amount: number
+    earnestMoney: number
+    financing: {
+        type: 'cash' | 'conventional' | 'fha' | 'va' | 'usda'
+        preApproved: boolean
+        lender?: string
+        downPayment: number
+    }
+    contingencies: {
+        inspection: boolean
+        appraisal: boolean
+        financing: boolean
+        saleOfBuyerHome: boolean
+        other?: string
+    }
+    closingDate: Date
+    status: 'pending' | 'accepted' | 'rejected' | 'countered' | 'expired'
+    counterOffer?: {
+        amount: number
+        terms: string
+        expiryDate: Date
+    }
+    notes?: string
+    createdAt: Date
+    updatedAt: Date
 } 

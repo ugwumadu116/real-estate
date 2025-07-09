@@ -30,6 +30,7 @@ import { mockTenants, mockUnits, mockProperties, mockSecurityDeposits, getSecuri
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { DepositStatus, DepositDeduction } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function SecurityDepositPage() {
     const params = useParams()
@@ -289,7 +290,7 @@ export default function SecurityDepositPage() {
                                         <Label>Held Date</Label>
                                         <div className="flex items-center space-x-2 mt-1">
                                             <Calendar className="h-4 w-4 text-muted-foreground" />
-                                            <span>{new Date(deposit.heldDate).toLocaleDateString()}</span>
+                                            <span>{format(new Date(deposit.heldDate), "MMM dd, yyyy")}</span>
                                         </div>
                                     </div>
                                     <div>
@@ -319,7 +320,7 @@ export default function SecurityDepositPage() {
                                             <Label>Refunded Date</Label>
                                             <div className="flex items-center space-x-2 mt-1">
                                                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                                                <span>{new Date(deposit.refundedDate).toLocaleDateString()}</span>
+                                                <span>{format(new Date(deposit.refundedDate), "MMM dd, yyyy")}</span>
                                             </div>
                                         </div>
                                     )}
@@ -364,7 +365,7 @@ export default function SecurityDepositPage() {
                                                     <p className="text-sm text-muted-foreground mt-1">{deduction.description}</p>
                                                     <div className="flex items-center space-x-2 mt-2 text-xs text-muted-foreground">
                                                         <Calendar className="h-3 w-3" />
-                                                        <span>Applied on {new Date(deduction.appliedDate).toLocaleDateString()}</span>
+                                                        <span>Applied on {format(new Date(deduction.appliedDate), "MMM dd, yyyy")}</span>
                                                         <User className="h-3 w-3" />
                                                         <span>by {deduction.appliedBy}</span>
                                                     </div>
@@ -461,7 +462,7 @@ export default function SecurityDepositPage() {
                                         <div className="flex-1">
                                             <div className="font-medium">Deposit Received</div>
                                             <div className="text-sm text-muted-foreground">
-                                                ${deposit.amount.toLocaleString()} received on {new Date(deposit.heldDate).toLocaleDateString()}
+                                                ${deposit.amount.toLocaleString()} received on {format(new Date(deposit.heldDate), "MMM dd, yyyy")}
                                             </div>
                                         </div>
                                     </div>
@@ -471,7 +472,7 @@ export default function SecurityDepositPage() {
                                             <div className="flex-1">
                                                 <div className="font-medium">Deduction Applied</div>
                                                 <div className="text-sm text-muted-foreground">
-                                                    ${deduction.amount} for {deduction.reason} on {new Date(deduction.appliedDate).toLocaleDateString()}
+                                                    ${deduction.amount} for {deduction.reason} on {format(new Date(deduction.appliedDate), "MMM dd, yyyy")}
                                                 </div>
                                             </div>
                                         </div>
@@ -482,7 +483,7 @@ export default function SecurityDepositPage() {
                                             <div className="flex-1">
                                                 <div className="font-medium">Deposit Refunded</div>
                                                 <div className="text-sm text-muted-foreground">
-                                                    ${deposit.refundedAmount?.toLocaleString()} refunded on {new Date(deposit.refundedDate).toLocaleDateString()}
+                                                    ${deposit.refundedAmount?.toLocaleString()} refunded on {format(new Date(deposit.refundedDate), "MMM dd, yyyy")}
                                                 </div>
                                             </div>
                                         </div>

@@ -25,6 +25,7 @@ import { mockLeases, mockTenants, mockUnits, mockProperties } from "@/lib/mock-d
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { LeaseStatus, LeaseType } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function LeasesPage() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -293,7 +294,7 @@ export default function LeasesPage() {
                                                         </Badge>
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
-                                                        {new Date(lease.startDate).toLocaleDateString()} - {new Date(lease.endDate).toLocaleDateString()}
+                                                        {format(new Date(lease.startDate), "MMM dd, yyyy")} - {format(new Date(lease.endDate), "MMM dd, yyyy")}
                                                     </div>
                                                     <div className={`text-sm ${getExpiryColor(lease.endDate)}`}>
                                                         {daysUntilExpiry > 0 ? `${daysUntilExpiry} days remaining` : `${Math.abs(daysUntilExpiry)} days expired`}

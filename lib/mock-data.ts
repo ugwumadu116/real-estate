@@ -18,7 +18,13 @@ import {
   SecurityDeposit,
   DepositDeduction,
   UnitConditionReport,
-  ConditionArea
+  ConditionArea,
+  PropertyListing,
+  Buyer,
+  PropertySale,
+  PropertyInquiry,
+  PropertyShowing,
+  PropertyOffer
 } from './types'
 
 // Mock Users

@@ -33,6 +33,7 @@ import { mockUnits, mockProperties, mockUnitConditionReports, getUnitConditionRe
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { UnitConditionReport, ConditionArea } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function UnitConditionReportsPage() {
     const params = useParams()
@@ -332,7 +333,7 @@ export default function UnitConditionReportsPage() {
                                                 </Badge>
                                             </div>
                                             <div className="text-sm text-muted-foreground">
-                                                {new Date(report.inspectionDate).toLocaleDateString()}
+                                                {format(new Date(report.inspectionDate), "MMM dd, yyyy")}
                                             </div>
                                         </div>
                                         <div className="flex space-x-2">
@@ -387,7 +388,7 @@ export default function UnitConditionReportsPage() {
                                 </div>
                             </CardTitle>
                             <CardDescription>
-                                {selectedReport.reportType.replace('_', ' ')} inspection on {new Date(selectedReport.inspectionDate).toLocaleDateString()}
+                                {selectedReport.reportType.replace('_', ' ')} inspection on {format(new Date(selectedReport.inspectionDate), "MMM dd, yyyy")}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -421,7 +422,7 @@ export default function UnitConditionReportsPage() {
                                             <Label>Inspection Date</Label>
                                             <div className="flex items-center space-x-2 mt-1">
                                                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                                                <span>{new Date(selectedReport.inspectionDate).toLocaleDateString()}</span>
+                                                <span>{format(new Date(selectedReport.inspectionDate), "MMM dd, yyyy")}</span>
                                             </div>
                                         </div>
                                         <div>

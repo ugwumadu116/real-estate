@@ -30,6 +30,7 @@ import {
 import { mockTenants, mockUnits, mockProperties, mockLeases, mockMaintenanceRequests, mockPayments } from "@/lib/mock-data"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function TenantDetailsPage() {
     const params = useParams()
@@ -201,7 +202,7 @@ export default function TenantDetailsPage() {
                                                             <span className="text-sm text-muted-foreground">Date of Birth</span>
                                                             <span className="text-sm">
                                                                 {tenant.dateOfBirth ?
-                                                                    new Date(tenant.dateOfBirth).toLocaleDateString() :
+                                                                    format(new Date(tenant.dateOfBirth), "MMM dd, yyyy") :
                                                                     "Not specified"
                                                                 }
                                                             </span>
@@ -219,7 +220,7 @@ export default function TenantDetailsPage() {
                                                             <span className="text-sm text-muted-foreground">Move-in Date</span>
                                                             <span className="text-sm">
                                                                 {tenant.moveInDate ?
-                                                                    new Date(tenant.moveInDate).toLocaleDateString() :
+                                                                    format(new Date(tenant.moveInDate), "MMM dd, yyyy") :
                                                                     "Not specified"
                                                                 }
                                                             </span>
@@ -362,11 +363,11 @@ export default function TenantDetailsPage() {
                                                             <div className="space-y-2">
                                                                 <div className="flex justify-between">
                                                                     <span className="text-sm text-muted-foreground">Start Date</span>
-                                                                    <span className="text-sm">{new Date(lease.startDate).toLocaleDateString()}</span>
+                                                                    <span className="text-sm">{format(new Date(lease.startDate), "MMM dd, yyyy")}</span>
                                                                 </div>
                                                                 <div className="flex justify-between">
                                                                     <span className="text-sm text-muted-foreground">End Date</span>
-                                                                    <span className="text-sm">{new Date(lease.endDate).toLocaleDateString()}</span>
+                                                                    <span className="text-sm">{format(new Date(lease.endDate), "MMM dd, yyyy")}</span>
                                                                 </div>
                                                                 <div className="flex justify-between">
                                                                     <span className="text-sm text-muted-foreground">Duration</span>
@@ -467,12 +468,12 @@ export default function TenantDetailsPage() {
                                                                     <div>
                                                                         <div className="font-medium">
                                                                             {payment.paidDate ?
-                                                                                new Date(payment.paidDate).toLocaleDateString() :
-                                                                                new Date(payment.dueDate).toLocaleDateString()
+                                                                                format(new Date(payment.paidDate), "MMM dd, yyyy") :
+                                                                                format(new Date(payment.dueDate), "MMM dd, yyyy")
                                                                             }
                                                                         </div>
                                                                         <div className="text-sm text-muted-foreground">
-                                                                            Due: {new Date(payment.dueDate).toLocaleDateString()}
+                                                                            Due: {format(new Date(payment.dueDate), "MMM dd, yyyy")}
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -547,7 +548,7 @@ export default function TenantDetailsPage() {
                                                             </p>
                                                             <div className="flex items-center gap-4 text-xs text-muted-foreground">
                                                                 <span>Category: {request.category.replace('_', ' ')}</span>
-                                                                <span>Created: {new Date(request.createdAt).toLocaleDateString()}</span>
+                                                                <span>Created: {format(new Date(request.createdAt), "MMM dd, yyyy")}</span>
                                                                 {request.estimatedCost && (
                                                                     <span>Est. Cost: ${request.estimatedCost}</span>
                                                                 )}

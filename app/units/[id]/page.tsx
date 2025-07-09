@@ -28,6 +28,7 @@ import { mockUnits, mockProperties, mockTenants, mockLeases, mockMaintenanceRequ
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { UnitStatus } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function UnitDetailsPage() {
     const params = useParams()
@@ -286,7 +287,7 @@ export default function UnitDetailsPage() {
                                                         <div>
                                                             <p className="text-sm text-muted-foreground">Lease Period</p>
                                                             <p className="font-semibold">
-                                                                {new Date(lease.startDate).toLocaleDateString()} - {new Date(lease.endDate).toLocaleDateString()}
+                                                                {format(new Date(lease.startDate), "MMM dd, yyyy")} - {format(new Date(lease.endDate), "MMM dd, yyyy")}
                                                             </p>
                                                         </div>
                                                         <div>

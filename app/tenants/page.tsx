@@ -24,6 +24,7 @@ import {
 import { mockTenants, mockUnits, mockProperties, mockLeases } from "@/lib/mock-data"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function TenantsPage() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -278,7 +279,7 @@ export default function TenantsPage() {
                                                     <div>
                                                         <div className="font-medium">${lease.rent.toLocaleString()}/month</div>
                                                         <div className="text-sm text-muted-foreground">
-                                                            Expires {new Date(lease.endDate).toLocaleDateString()}
+                                                            Expires {format(new Date(lease.endDate), "MMM dd, yyyy")}
                                                         </div>
                                                         {overduePayments > 0 && (
                                                             <Badge variant="destructive" className="text-xs mt-1">
@@ -294,7 +295,7 @@ export default function TenantsPage() {
                                                 {tenant.moveInDate ? (
                                                     <div>
                                                         <div className="font-medium">
-                                                            {new Date(tenant.moveInDate).toLocaleDateString()}
+                                                            {format(new Date(tenant.moveInDate), "MMM dd, yyyy")}
                                                         </div>
                                                         <div className="text-sm text-muted-foreground">
                                                             {Math.floor((new Date().getTime() - tenant.moveInDate.getTime()) / (1000 * 60 * 60 * 24))} days

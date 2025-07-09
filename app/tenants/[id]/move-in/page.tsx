@@ -28,6 +28,7 @@ import { mockTenants, mockUnits, mockProperties, mockMoveInChecklists, getMoveIn
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { ChecklistStatus, ChecklistItem } from "@/lib/types"
 import Link from "next/link"
+import { format } from "date-fns"
 
 export default function MoveInChecklistPage() {
     const params = useParams()
@@ -315,7 +316,7 @@ export default function MoveInChecklistPage() {
                                             {item.status === "completed" && item.completedAt && (
                                                 <div className="flex items-center space-x-2 mt-2 text-xs text-muted-foreground">
                                                     <Calendar className="h-3 w-3" />
-                                                    <span>Completed on {new Date(item.completedAt).toLocaleDateString()}</span>
+                                                    <span>Completed on {format(new Date(item.completedAt), "MMM dd, yyyy")}</span>
                                                     {item.completedBy && (
                                                         <>
                                                             <User className="h-3 w-3" />

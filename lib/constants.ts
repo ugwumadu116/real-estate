@@ -42,7 +42,13 @@ export const PROPERTY_TYPES: { value: PropertyType; label: string }[] = [
     { value: 'house', label: 'House' },
     { value: 'condo', label: 'Condo' },
     { value: 'townhouse', label: 'Townhouse' },
-    { value: 'commercial', label: 'Commercial' }
+    { value: 'commercial', label: 'Commercial' },
+    { value: 'apartment_block', label: 'Apartment Block' },
+    { value: 'duplex', label: 'Duplex' },
+    { value: 'terrace', label: 'Terrace' },
+    { value: 'semi_detached_duplex', label: 'Semi Detached Duplex' },
+    { value: 'fully_detached_duplex', label: 'Fully Detached Duplex' },
+    { value: 'land', label: 'Land' }
 ]
 
 // Unit Types
@@ -54,6 +60,8 @@ export const UNIT_TYPES = [
     { value: '4br', label: '4 Bedrooms' },
     { value: 'penthouse', label: 'Penthouse' }
 ]
+
+
 
 // Unit Status Options
 export const UNIT_STATUS_OPTIONS: { value: UnitStatus; label: string; color: string }[] = [
